@@ -1,5 +1,8 @@
+// importing inquirer
 const inquirer = require('inquirer');
+// secret password 
 require('dotenv').config()
+// getting that Hi-def connection yo
 const db = require("./db/connection")
 
 
@@ -10,9 +13,10 @@ db.connect(err => {
  
   
 
-
+// "initial"
 init()
 
+// start prompt
 function init(){
     inquirer.prompt([
         {
@@ -62,7 +66,7 @@ function init(){
 // display all employees
 viewEmployees = () => {
     
-    console.log('Showing all employees...\n'); 
+    console.log('Viewing employees'); 
     const sql = `SELECT employee.id, 
                         employee.first_name, 
                         employee.last_name, 
@@ -84,7 +88,7 @@ viewEmployees = () => {
 
   // function to sneak peak at those roles ;) 
 viewRoles = () => {
-    console.log('Showing all roles...\n');
+    console.log('Viewing roles');
   
     const sql = `SELECT * FROM roles`;
     
@@ -97,7 +101,7 @@ viewRoles = () => {
 
   // function to peak at the departments 
 viewDepartments = () => {
-    console.log('Showing all departments...\n');
+    console.log('Viewing departments');
     const sql = `SELECT * FROM department`; 
   
     db.query(sql, (err, rows) => {
@@ -142,7 +146,7 @@ createRole = () => {
       {
         type: 'input', 
         name: 'roles',
-        message: "What kind of roole would you like to add?",
+        message: "What is the role you would like to add?",
         validate: addRole => {
           if (addRole) {
               return true;
@@ -269,7 +273,7 @@ createEmployee = () => {
                     {
                       type: 'list',
                       name: 'manager',
-                      message: "Who is the employee's manager?",
+                      message: "Who is the manager of your employee?",
                       choices: managers
                     }
                   ])
@@ -328,7 +332,7 @@ updateEmployee = () => {
                 {
                   type: 'list',
                   name: 'role',
-                  message: "What is the employee's new role?",
+                  message: "What role does your employee have?",
                   choices: roles
                 }
               ])
@@ -342,7 +346,7 @@ updateEmployee = () => {
   
                   const sql = `UPDATE employee SET roles_id = ? WHERE id = ?`;
   
-                  db.query(sql, params, (err, result) => {
+                  db.query(sql, params, (err, result) => { 
                     if (err) throw err;
                   console.log(`You've updated your desired employee`);
                 
