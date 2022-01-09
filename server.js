@@ -4,6 +4,8 @@ const inquirer = require('inquirer');
 require('dotenv').config()
 // getting that Hi-def connection yo
 const db = require("./db/connection")
+// making nice tables for us
+const ct = require('console.table')
 
 
 db.connect(err => {
