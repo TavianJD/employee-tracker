@@ -67,6 +67,7 @@ function init(){
 viewEmployees = () => {
     
     console.log('Viewing employees'); 
+
     const sql = `SELECT employee.id, 
                         employee.first_name, 
                         employee.last_name, 
@@ -315,6 +316,7 @@ updateEmployee = () => {
           choices: employees
         }
       ])
+      // also from tutor
         .then(empChoice => {
           const employee = empChoice.name;
           const params = []; 
